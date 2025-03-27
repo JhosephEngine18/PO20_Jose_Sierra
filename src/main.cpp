@@ -8,14 +8,11 @@ Description: This program will let you type personal data of 3 persons
 
 #include <conio.h>
 #include <iostream>
-#include <cstdlib>
 using namespace std;
 int Selection;
-int setter;
 string Tasks[5];
-string NewTasks[5];
-int DeleteWord;
-
+int LastPosition = 0;
+bool Answer;
 
 void Separations()
 {
@@ -24,21 +21,37 @@ void Separations()
 
 void AddTask()
 {
-    if (setter == 1)
+    
+    for (int i = 0; i < 5; i++)
     {
-        setter++;
+        cout << "Name your task\n";
+        cin >> Tasks[LastPosition];
+        Separations();
+        cout << "Task added correctly\n";
+        cout << "Would You like to add another task?\n";
+        cout << "Y = 1 | N = 0\n";
+        cin >> Answer;
+        
+        if (Answer == 0)
+        {
+            break;
+        }
+        
+        LastPosition++; 
+        
+        if (LastPosition >= 5)
+        {
+            cout << "Maximum tasks reached\n";
+            getch();
+            break;
+        }
     }
-    
-    
-    cout << "Name your task\n";
-    cin >> Tasks[setter];
-    Separations();
-    cout << "Task added correctly\n";
-    setter++;
 }
 
 void DeleteTask()
 {
+    int tasktodelete;
+    int counter = 0;
     if (Tasks[0].length() == 0)
     {
         Separations();
@@ -48,44 +61,25 @@ void DeleteTask()
     {
     cout << "Which task would you like to delete?\n";
     cout << "Select only with positions showed\n";
-        for (int i = 0; i < setter; i++)
+        for (int i = 0; i <= LastPosition; i++)
         {
-            cout << i <<"-"<< Tasks[i] << "\n";
+            counter++;
+            cout << counter <<"-"<< Tasks[i] << "\n";
             Separations();
         }
-        cin >> DeleteWord;
+        cin >> tasktodelete;
 
-        switch (DeleteWord)
+        for (int i = tasktodelete; i < LastPosition; i++)
         {
-        case 1:
-            for (int i = 0; i < setter; i++)
-            {
-                NewTasks[i] == Tasks[i++];
-            }
-            
-            break;
-        case 2:
-
-            break;
-        case 3:
-
-            break;
-        case 4:
-
-            break;
-
-        case 5:
-
-            break;
-        
-        default:
-            break;
+            Tasks[i] = Tasks[i + 1];
         }
+        
     }
 }
 
 void WatchTasks()
 {
+    int counter = 0;
     if (Tasks[0].length() == 0)
     {
         Separations();
@@ -93,12 +87,14 @@ void WatchTasks()
     }
     else
     {
-        for (int i = 0; i < setter; i++)
-        {
-            cout << i++ <<"-"<< Tasks[i] << "\n";
+        for (int i = 0; i <= LastPosition; i++)
+        { 
+            counter++;
+            cout << counter <<"-"<< Tasks[i] << "\n";
             Separations();
         }
     }
+    getch();
 }
 
 
