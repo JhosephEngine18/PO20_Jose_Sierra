@@ -69,11 +69,7 @@ void DeleteTask()
         }
         cin >> tasktodelete;
 
-        for (int i = tasktodelete; i < LastPosition; i++)
-        {
-            Tasks[i] = Tasks[i + 1];
-        }
-        
+
     }
 }
 
