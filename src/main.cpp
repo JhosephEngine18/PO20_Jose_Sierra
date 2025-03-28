@@ -30,6 +30,12 @@ void AddTask()
     
     for (int i = 0; i < 5; i++)
     {
+        if (LastPosition >= 5)
+        {
+            cout << "Maximum tasks reached\n";
+            MainMenu();
+            break;
+        }
         cout << "Name your task\n";
         cin >> Tasks[LastPosition];
         Separations();
@@ -71,6 +77,9 @@ void DeleteTask()
     {
     cout << "Which task would you like to delete?\n";
     cout << "Select only with positions showed\n";
+    Separations();
+    cout << "Tasks\n";
+    Separations();
         for (int i = 0; i < LastPosition; i++)
         {
             counter++;
@@ -107,6 +116,8 @@ void WatchTasks()
     }
     else
     {
+        cout << "Tasks\n";
+        Separations();
         for (int i = 0; i < LastPosition; i++)
         { 
             counter++;
