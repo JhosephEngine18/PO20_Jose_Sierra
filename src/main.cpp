@@ -27,15 +27,14 @@ void MainMenu()
 //This function adds tasks
 void AddTask() 
 {
-    
-    for (int i = 0; i < 5; i++)
-    {
-        if (LastPosition >= 5)
+    if (LastPosition >= 5)
         {
             cout << "Maximum tasks reached\n";
             MainMenu();
-            break;
         }
+    
+    for (int i = 0; i < 5; i++)
+    {
         cout << "Name your task\n";
         cin >> Tasks[LastPosition];
         Separations();
