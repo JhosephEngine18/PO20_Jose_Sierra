@@ -3,13 +3,12 @@ Universidad Amerike
 Author: José Sierra
 Project: Task List
 Date: 25/03/25
-Description: This program will let you type personal data of 3 persons
+Description: This program is a TasksList, you can Add, Delete, Vizualice tasks
 */
 
 #include <conio.h>
 #include <iostream>
 using namespace std;
-int Selection;
 string Tasks[5];
 int LastPosition = 0;
 bool Answer;
@@ -19,7 +18,14 @@ void Separations()
     cout << "--------------------------------\n";
 }
 
-void AddTask()
+void MainMenu()
+{
+    cout << "Press Any Button to go back to the menu\n";
+    getch();
+}
+
+//This function adds tasks
+void AddTask() 
 {
     
     for (int i = 0; i < 5; i++)
@@ -32,36 +38,40 @@ void AddTask()
         cout << "Y = 1 | N = 0\n";
         cin >> Answer;
         
+        LastPosition++;
+
         if (Answer == 0)
         {
+            MainMenu();
             break;
         }
         
-        LastPosition++; 
         
         if (LastPosition >= 5)
         {
             cout << "Maximum tasks reached\n";
-            getch();
+            MainMenu();
             break;
         }
     }
 }
 
+//This function deletes tasks
 void DeleteTask()
 {
     int tasktodelete;
     int counter = 0;
-    if (Tasks[0].length() == 0)
+    if (LastPosition == 0)
     {
         Separations();
         cout << "Theres no any task to delete\n";
+        MainMenu();
     }
     else
     {
     cout << "Which task would you like to delete?\n";
     cout << "Select only with positions showed\n";
-        for (int i = 0; i <= LastPosition; i++)
+        for (int i = 0; i < LastPosition; i++)
         {
             counter++;
             cout << counter <<"-"<< Tasks[i] << "\n";
@@ -69,34 +79,50 @@ void DeleteTask()
         }
         cin >> tasktodelete;
 
+        Tasks[tasktodelete-1] = "";
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (Tasks[i].length() == 0 && i < LastPosition-1)
+            {
+                cout << "Tarea recorrida\n";
+                Tasks[i] = Tasks[i+1];
+                Tasks[i+1] = "";
+            }
+            
+        }
+        LastPosition--;        
+
 
     }
 }
 
+//This function allows you vizualice
 void WatchTasks()
 {
     int counter = 0;
-    if (Tasks[0].length() == 0)
+    if (LastPosition == 0)
     {
         Separations();
         cout << "You dont have any task typed\n";
     }
     else
     {
-        for (int i = 0; i <= LastPosition; i++)
+        for (int i = 0; i < LastPosition; i++)
         { 
             counter++;
             cout << counter <<"-"<< Tasks[i] << "\n";
             Separations();
         }
     }
-    getch();
+    MainMenu();
 }
 
-
+//This function tells you the options that you can do
 void Options()
 {
-    Selection = 0;
+    int Selection = 0;
+
     Separations();
     cout << "1 =  Add\n";
     Separations();
@@ -134,6 +160,7 @@ void Options()
         break;
     }
 }
+
 int main()
 {
     Separations();
