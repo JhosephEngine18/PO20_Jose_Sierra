@@ -32,7 +32,9 @@ void AddTask()
             cout << "Maximum tasks reached\n";
             MainMenu();
         }
-    
+    else
+    {
+
     for (int i = 0; i < 5; i++)
     {
         cout << "Name your task\n";
@@ -58,6 +60,7 @@ void AddTask()
             MainMenu();
             break;
         }
+    }
     }
 }
 
