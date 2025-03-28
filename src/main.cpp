@@ -85,7 +85,6 @@ void DeleteTask()
         {
             if (Tasks[i].length() == 0 && i < LastPosition-1)
             {
-                cout << "Tarea recorrida\n";
                 Tasks[i] = Tasks[i+1];
                 Tasks[i+1] = "";
             }
